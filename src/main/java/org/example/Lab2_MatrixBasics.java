@@ -114,17 +114,25 @@ public class Lab2_MatrixBasics {
         return (double) sum / count;
     }
 
+    // Розрахунок середнього геометричного елементів матриці
     private static double calculateGeometricMean(int[][] matrix) {
         double product = 1.0;
         int count = 0;
+
         for (int[] row : matrix) {
             for (int value : row) {
-                if (value > 0) {
+                if (value > 0) { // геометричне визначене тільки для додатних чисел
                     product *= value;
                     count++;
                 }
             }
         }
-        return count > 0 ? Math.pow(product, 1.0 / count) : 0;
+
+        if (count == 0) {
+            System.out.println("⚠️ Неможливо обчислити середнє геометричне — у матриці немає додатних елементів.");
+            return 0;
+        }
+
+        return Math.pow(product, 1.0 / count);
     }
 }
