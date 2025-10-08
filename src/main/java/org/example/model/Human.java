@@ -1,5 +1,7 @@
 package org.example.model;
 
+import java.util.Objects;
+
 public abstract class Human {
     protected String firstName;
     protected String lastName;
@@ -17,4 +19,21 @@ public abstract class Human {
     public String toString() {
         return firstName + " " + patronymic + " " + lastName + " (" + sex + ")";
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Human)) return false;
+        Human human = (Human) o;
+        return firstName.equals(human.firstName)
+                && lastName.equals(human.lastName)
+                && patronymic.equals(human.patronymic)
+                && sex == human.sex;
+    }
+
+    @Override
+    public int hashCode() {
+        return java.util.Objects.hash(firstName, lastName, patronymic, sex);
+    }
+
 }
